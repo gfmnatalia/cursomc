@@ -53,7 +53,7 @@ public class DBService {
 	private ItemPedidoRepository itemPedidoRepository;
 
 
-	public void instatiateDatabase () throws ParseException {
+	public void instantiateDatabase () throws ParseException {
 		
 		Categoria cat1 = new Categoria(null, "Informática");
 		Categoria cat2 = new Categoria(null, "Escritório");
@@ -61,7 +61,7 @@ public class DBService {
 		Categoria cat4 = new Categoria(null, "Casa");
 		Categoria cat5 = new Categoria(null, "Cozinha");
 		Categoria cat6 = new Categoria(null, "Musica");
-		Categoria cat7 = new Categoria(null, "Decoração");		
+		Categoria cat7 = new Categoria(null, "Decoração");				
 				
 		Produto p1 = new Produto(null, "Computador", 2000.00);
 		Produto p2 = new Produto(null, "Impressora", 800.00);
