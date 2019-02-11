@@ -14,11 +14,14 @@ import org.springframework.stereotype.Service;
 import com.curso.jpa.domain.Cidade;
 import com.curso.jpa.domain.Cliente;
 import com.curso.jpa.domain.Endereco;
+import com.curso.jpa.domain.enums.Perfil;
 import com.curso.jpa.domain.enums.TipoCliente;
 import com.curso.jpa.dto.ClienteDTO;
 import com.curso.jpa.dto.ClienteNewDTO;
 import com.curso.jpa.repositories.ClienteRepository;
 import com.curso.jpa.repositories.EnderecoRepository;
+import com.curso.jpa.security.UserSS;
+import com.curso.jpa.services.exceptions.AuthorizationException;
 import com.curso.jpa.services.exceptions.DataIntegrityException;
 import com.curso.jpa.services.exceptions.ObjectNotFoundException;
 
@@ -34,7 +37,14 @@ public class ClienteService {
 	@Autowired
 	private BCryptPasswordEncoder pe;
 
-	public Cliente find(Integer id) {		
+	public Cliente find(Integer id) {	
+		
+		UserSS user = UserService.authenticated();
+		
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+				throw new AuthorizationException("Acesso Negado");
+		}
+		
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));		
@@ -96,4 +106,6 @@ public class ClienteService {
 		newObj.setNome(obj.getNome());
 		newObj.setEmail(obj.getEmail());
 	}
+	
+	
 }

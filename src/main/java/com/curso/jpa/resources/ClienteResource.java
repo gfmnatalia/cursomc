@@ -33,7 +33,7 @@ public class ClienteResource {
 	@Autowired
 	private ClienteService service;
 	
-	@PreAuthorize("hasAnyRole('ADMIN')") 
+	
 	@GetMapping(value="/{id}")
 	public ResponseEntity<Cliente> find(@PathVariable Integer id) {		
 		Cliente obj = service.find(id);
