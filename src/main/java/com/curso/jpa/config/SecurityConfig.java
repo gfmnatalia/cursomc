@@ -24,8 +24,6 @@ import com.curso.jpa.security.JWTAuthorizationFilter;
 import com.curso.jpa.security.JWTUtil;
 
 
-
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true) 
@@ -46,7 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	};
 	
 	private static final String[] PUBLIC_MATCHERS_POST = {			
-			"/clientes/**"			
+			"/clientes/**",
+			"/auth/forgot/**"
 	};
 	
 	private static final String[] PUBLIC_MATCHERS_GET = {			
